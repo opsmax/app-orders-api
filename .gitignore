@@ -1,0 +1,15 @@
+# Build artifacts
+bin/
+dist/
+*.exe
+
+# Dependencies
+vendor/
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
