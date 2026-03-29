@@ -3,6 +3,21 @@ bin/
 dist/
 *.exe
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+.eggs/
+.venv/
+venv/
+.pytest_cache/
+htmlcov/
+.coverage
+.mypy_cache/
+.ruff_cache/
+
 # Dependencies
 vendor/
 node_modules/
@@ -10,6 +25,9 @@ node_modules/
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
+Thumbs.db
