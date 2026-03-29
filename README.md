@@ -7,6 +7,56 @@ This repository follows the **"Option A: Monorepo"** pattern from the IDP
 design — application source code and infrastructure intent live together in a
 single repository.
 
+## Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| Language | Python 3.12 |
+| Framework | FastAPI |
+| Database | PostgreSQL (optional — falls back to in-memory mock data) |
+| Container | Docker multi-stage build |
+| Tests | pytest + httpx |
+| CI | GitHub Actions |
+
+## Running Locally
+
+```bash
+# Install dependencies
+pip install -r src/requirements.txt
+
+# Start the server
+uvicorn src.app.main:app --host 0.0.0.0 --port 8080 --reload
+
+# Or run with Docker
+docker build -t orders-api .
+docker run -p 8080:8080 orders-api
+```
+
+The app starts immediately with mock data — no database required.
+To connect to PostgreSQL, set `DATABASE_URL`:
+
+```bash
+export DATABASE_URL="postgresql://user:pass@localhost:5432/orders"
+```
+
+## API Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/` | App info and available endpoints |
+| GET | `/health` | Health check with database status |
+| GET | `/api/orders` | List all orders |
+| GET | `/api/orders/{id}` | Get a single order |
+| GET | `/api/stats` | Order statistics (revenue, top products) |
+| GET | `/docs` | Interactive OpenAPI documentation |
+
+## Running Tests
+
+```bash
+pip install pytest httpx
+pytest tests/ -v
+```
+
 ## How It Works
 
 The IDP workflow is driven by a single file: **`infra/deploy.yaml`** (the
@@ -79,38 +129,25 @@ deploys the application to the target AKS cluster.
 
 ```
 app-orders-api/
+├── src/
+│   ├── app/
+│   │   ├── main.py          # FastAPI application and routes
+│   │   ├── models.py        # Pydantic response models
+│   │   ├── database.py      # PostgreSQL connection (with fallback)
+│   │   └── mock_data.py     # Mock order data
+│   └── requirements.txt     # Python dependencies
+├── tests/
+│   ├── conftest.py          # Test fixtures
+│   └── test_api.py          # API endpoint tests
 ├── infra/
-│   ├── deploy.yaml              # Intent contract (the key interface)
-│   ├── base/                    # Kustomize base manifests
-│   └── overlays/
-│       ├── dev/                 # Dev environment overrides
-│       ├── uat/                 # UAT environment overrides
-│       └── prod/                # Production environment overrides
-├── src/                         # Application source code
-├── tests/                       # Tests
-├── .github/workflows/           # CI/CD workflows
+│   ├── deploy.yaml          # Intent contract (the key interface)
+│   ├── base/                # Kustomize base manifests
+│   └── overlays/            # Per-environment overrides
+├── Dockerfile               # Multi-stage production build
+├── .github/workflows/       # CI/CD workflows
 ├── LICENSE
 └── README.md
 ```
-
-### Kustomize Layout
-
-The `infra/` directory uses the standard Kustomize pattern:
-
-- **`base/`** — shared Kubernetes manifests (Deployment, Service, ConfigMap)
-  that apply to every environment.
-- **`overlays/{env}/`** — per-environment patches (replica counts, resource
-  limits, environment variables, ingress rules).
-
-ArgoCD points at each overlay directory to deploy the corresponding
-environment.
-
-## Getting Started
-
-1. Clone this repository.
-2. Edit `infra/deploy.yaml` to describe your application's requirements.
-3. Open a PR — the platform will validate the contract and preview changes.
-4. Merge — infrastructure is provisioned and the app is deployed automatically.
 
 ## License
 
