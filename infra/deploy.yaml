@@ -1,0 +1,38 @@
+# Application Intent Contract
+# This file declares what the application needs.
+# The platform resolves it to concrete infrastructure.
+apiVersion: idp.platform/v1
+kind: ApplicationIntent
+metadata:
+  name: orders-api
+  ownerTeam: commerce
+  costCenter: CC-DEMO
+
+spec:
+  environments: [dev, uat, prod]
+
+  compute:
+    platform: aks
+    workloadType: web-api
+    containerImage: opsmax.azurecr.io/orders-api
+    autoscaling:
+      minReplicas: 2
+      maxReplicas: 10
+
+  exposure:
+    ingress: private
+    dnsZone: internal.opsmax.io
+
+  data:
+    postgres:
+      enabled: true
+      tier: general-purpose-small
+
+  security:
+    complianceTier: standard
+    secrets:
+      - name: DB_CONNECTION_STRING
+        source: keyvault
+
+  reliability:
+    slo: "99.9"
