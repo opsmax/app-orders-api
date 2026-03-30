@@ -34,3 +34,4 @@ spec:
 
   reliability:
     slo: "99.95"  # E2E test - intent resolver validation
+# triggered
