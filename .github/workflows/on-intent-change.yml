@@ -1,0 +1,19 @@
+name: Resolve Intent Contract
+
+on:
+  pull_request:
+    paths:
+      - 'infra/deploy.yaml'
+  push:
+    branches: [main]
+    paths:
+      - 'infra/deploy.yaml'
+
+jobs:
+  resolve:
+    uses: opsmax/platform-core/.github/workflows/intent-resolve.yml@main
+    with:
+      app_name: orders-api
+      dry_run: ${{ github.event_name == 'pull_request' }}
+    secrets:
+      PLATFORM_APP_PRIVATE_KEY: ${{ secrets.PLATFORM_APP_PRIVATE_KEY }}
