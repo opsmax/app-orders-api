@@ -6,4 +6,6 @@ jobs:
   test:
     uses: opsmax/platform-core/.github/workflows/test-reusable.yml@main
     with:
-      message: 'Cross-repo call works!'
+      message: 'Cross-repo call with secret works!'
+    secrets:
+      PLATFORM_APP_PRIVATE_KEY: ${{ secrets.PLATFORM_APP_PRIVATE_KEY }}
