@@ -7,11 +7,9 @@ metadata:
   name: orders-api
   ownerTeam: commerce
   costCenter: CC1234
-
 spec:
   environments:
     - dev
-
   compute:
     platform: aks
     workloadType: web-api
@@ -19,20 +17,15 @@ spec:
     autoscaling:
       minReplicas: 2
       maxReplicas: 10
-
   exposure:
     ingress: private
-
   data:
     postgres:
       enabled: true
       tier: general-purpose-small
-
   security:
     complianceTier: standard
     secrets: keyvault
-
   reliability:
     slo: "99.95"
 
-# Resolved by IDP Intent Resolver
