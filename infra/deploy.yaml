@@ -6,22 +6,22 @@ kind: ApplicationIntent
 metadata:
   name: orders-api
   ownerTeam: commerce
-  costCenter: CC-DEMO
+  costCenter: CC1234
 
 spec:
-  environments: [dev, uat, prod]
+  environments:
+    - dev
 
   compute:
     platform: aks
     workloadType: web-api
-    containerImage: opsmax.azurecr.io/orders-api
+    containerImage: acridpshared.azurecr.io/orders-api
     autoscaling:
       minReplicas: 2
       maxReplicas: 10
 
   exposure:
     ingress: private
-    dnsZone: internal.opsmax.io
 
   data:
     postgres:
@@ -30,9 +30,7 @@ spec:
 
   security:
     complianceTier: standard
-    secrets:
-      - name: DB_CONNECTION_STRING
-        source: keyvault
+    secrets: keyvault
 
   reliability:
     slo: "99.9"
