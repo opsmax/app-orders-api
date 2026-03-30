@@ -1,0 +1,9 @@
+name: Test Cross-Repo Call
+on:
+  push:
+    branches: [test/intent-resolver-e2e]
+jobs:
+  test:
+    uses: opsmax/platform-core/.github/workflows/test-reusable.yml@main
+    with:
+      message: 'Cross-repo call works!'
