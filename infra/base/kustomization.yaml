@@ -6,7 +6,12 @@ commonLabels:
   app.kubernetes.io/managed-by: kustomize
 
 resources:
+
   - deployment.yaml
+
   - service.yaml
+
   - hpa.yaml
+
   - networkpolicy.yaml
+
