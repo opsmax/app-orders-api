@@ -8,4 +8,3 @@ namespace: orders-api
 
 images:
   - name: acridpshared.azurecr.io/orders-api
-    newTag: v0.1.0
