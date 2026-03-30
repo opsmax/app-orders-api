@@ -33,4 +33,4 @@ spec:
     secrets: keyvault
 
   reliability:
-    slo: "99.9"
+    slo: "99.95"
