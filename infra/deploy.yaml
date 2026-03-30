@@ -34,3 +34,5 @@ spec:
 
   reliability:
     slo: "99.95"
+
+# Resolved by IDP Intent Resolver
