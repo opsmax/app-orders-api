@@ -6,7 +6,7 @@ kind: ApplicationIntent
 metadata:
   name: orders-api
   ownerTeam: commerce
-  costCenter: CC1234
+  costCenter: CC5678
 spec:
   environments:
     - dev
