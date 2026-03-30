@@ -10,7 +10,6 @@ on:
       - 'infra/deploy.yaml'
 
 permissions:
-  id-token: write
   contents: read
   pull-requests: write
 
