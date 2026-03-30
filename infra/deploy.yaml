@@ -15,8 +15,8 @@ spec:
     workloadType: web-api
     containerImage: acridpshared.azurecr.io/orders-api
     autoscaling:
-      minReplicas: 2
-      maxReplicas: 10
+      minReplicas: 3
+      maxReplicas: 20
   exposure:
     ingress: private
   data:
