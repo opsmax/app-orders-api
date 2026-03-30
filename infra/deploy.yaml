@@ -1,3 +1,4 @@
+# Intent resolver E2E test
 # Application Intent Contract
 # This file declares what the application needs.
 # The platform resolves it to concrete infrastructure.
