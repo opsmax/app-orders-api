@@ -1,4 +1,3 @@
-# Intent resolver E2E test
 # Application Intent Contract
 # This file declares what the application needs.
 # The platform resolves it to concrete infrastructure.
@@ -34,4 +33,4 @@ spec:
     secrets: keyvault
 
   reliability:
-    slo: "99.9"
+    slo: "99.95"
