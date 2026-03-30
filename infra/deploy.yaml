@@ -33,4 +33,4 @@ spec:
     secrets: keyvault
 
   reliability:
-    slo: "99.95"
+    slo: "99.95"  # E2E test change
